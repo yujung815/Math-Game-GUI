@@ -22,40 +22,23 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.AncestorEvent;
-
-
+import rank.GetRank;
+import rank.UpdateRank;
 
 
 class RankPage extends JFrame {
-	public static String point;
-	public static boolean result;
-	public static int max=0, min=0;
-	private static String[] strRank;
-	private static JLabel lblshow1;
-	private static JLabel lblshow2;
-	private static JLabel lblshow3;
-	private static JLabel lblshow4;
-	private static JLabel lblshow5;
+	public  String point;
+	public  boolean result;
+	public  int max=0, min=0;
+	private  JLabel lblshow1;
+	private  JLabel lblshow2;
+	private  JLabel lblshow3;
+	private  JLabel lblshow4;
+	private  JLabel lblshow5;
 	private JPanel contentPane;
-	private static String strCurrentLine;
-	private static String s;
 
-	public static String getStr(int i){
-		try{
-
-			BufferedReader br3 =new BufferedReader(new FileReader("Ranking.txt"));
-
-			while((strCurrentLine=br3.readLine())!=null) {
-				strRank[i++]=strCurrentLine;
-			}
-			br3.close();
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-		s=strRank[i];
-		//줄별로 출력하는거만들기
-		return s;
-	}
+	private String[] arrscore;
+	private String[] arrname;
 
 
 
@@ -64,7 +47,8 @@ class RankPage extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public  void main(String[] args) throws IOException{
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -81,6 +65,7 @@ class RankPage extends JFrame {
 	 * Create the frame.
 	 */
 	public RankPage() {
+
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(1200,800,1200,800);
@@ -111,28 +96,38 @@ class RankPage extends JFrame {
 		btnyes.setBounds(504, 642, 146, 42);
 		contentPane.add(btnyes);
 
+		UpdateRank ur = new UpdateRank();
+		GetRank gr =new GetRank();
+		try {
+			ur.sortRSave(gr.getRScore(), gr.getRName());
+			arrscore=gr.getRScore();
+			arrname=gr.getRName();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 
-		lblshow1 = new JLabel(getStr(0)); //String 타입의 str을 전달
+
+		lblshow1 = new JLabel(arrname[0]+":\t"+arrscore[0]+"점"); //String 타입의 str을 전달
 		lblshow1.setFont(new Font("바탕", Font.BOLD, 30));
 		lblshow1.setBounds(153, 128, 819, 59);
 		contentPane.add(lblshow1);
 
-		lblshow2 = new JLabel(getStr(1));
+		lblshow2 = new JLabel(arrname[1]+":\t"+arrscore[1]+"점");
 		lblshow2.setFont(new Font("바탕", Font.BOLD, 30));
 		lblshow2.setBounds(153, 217, 819, 59);
 		contentPane.add(lblshow2);
 
-		lblshow3 = new JLabel(getStr(2));
+		lblshow3 = new JLabel(arrname[2]+":\t"+arrscore[2]+"점");
 		lblshow3.setFont(new Font("바탕", Font.BOLD, 30));
 		lblshow3.setBounds(153, 311, 819, 59);
 		contentPane.add(lblshow3);
 
-		lblshow4 = new JLabel(getStr(3));
+		lblshow4 = new JLabel(arrname[3]+":\t"+arrscore[3]+"점");
 		lblshow4.setFont(new Font("바탕", Font.BOLD, 30));
 		lblshow4.setBounds(153, 406, 819, 59);
 		contentPane.add(lblshow4);
 
-		lblshow5 = new JLabel(getStr(4));
+		lblshow5 = new JLabel(arrname[4]+":\t"+arrscore[4]+"점");
 		lblshow5.setFont(new Font("바탕", Font.BOLD, 30));
 		lblshow5.setBounds(153, 491, 819, 59);
 		contentPane.add(lblshow5);

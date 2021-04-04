@@ -77,9 +77,16 @@ public class FirstPage extends JFrame {
 		contentPane.add(lblname);
 		
 		JButton btnrank = new JButton("\uB7AD\uD0B9\uBCF4\uAE30");
+		btnrank.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnrank.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				
+				
+				
 				
 				dispose();
 				setVisible(false);
