@@ -38,7 +38,7 @@ public class UpdateRank {
 		for(int j=0;j<4;j++) {
 			for(int i=0;i<4-j;i++) {
 				if(Integer.parseInt(scores[i])<Integer.parseInt(scores[i+1])) {
-					System.out.println("비교가능");
+					//System.out.println("비교가능");
 					String tmp="";
 					tmp=scores[i];
 					scores[i]=scores[i+1];

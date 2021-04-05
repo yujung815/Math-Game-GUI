@@ -11,7 +11,7 @@ public class SetDefault {//디폴트 랭크세팅하기
 	static int[] scores = {0,0,0,0,0};
 	
 	
-	public  void setDName() {
+	public void setDName() {
 	try{
 		PrintWriter pw1=new PrintWriter(new BufferedWriter(new FileWriter("rank_names.txt")));
 		for(int i=0;i<5;i++) {

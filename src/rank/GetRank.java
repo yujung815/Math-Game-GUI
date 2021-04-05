@@ -22,7 +22,10 @@ public class GetRank {//랭크불러와서 배열로 리턴
 				name=s;
 			}
 		}catch(FileNotFoundException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			SetDefault sd = new SetDefault();
+			sd.setDName();
+			getRName();
 		}finally {
 			br1.close();
 		}
@@ -46,12 +49,14 @@ public class GetRank {//랭크불러와서 배열로 리턴
 			br2 =new BufferedReader(new FileReader("D:\\SW실습\\rungame\\rank_scores.txt"));
 			String s="";
 			while((s=br2.readLine())!=null) {
-				System.out.println(s);
+				//System.out.println(s);
 				score=s;
 			}
 			br2.close();
-		}catch(IOException ioe) {
-			ioe.printStackTrace();
+		}catch(FileNotFoundException fe){	
+			SetDefault sd = new SetDefault();
+			sd.setDScore();
+			getRScore();
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}

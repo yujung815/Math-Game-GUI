@@ -53,6 +53,7 @@ class RankPage extends JFrame {
 			public void run() {
 				try {
 					RankPage frame = new RankPage();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -107,34 +108,30 @@ class RankPage extends JFrame {
 		}
 
 
-		lblshow1 = new JLabel(arrname[0]+":\t"+arrscore[0]+"점"); //String 타입의 str을 전달
+		lblshow1 = new JLabel("1등"+arrname[0]+":\t"+arrscore[0]+"점"); //String 타입의 str을 전달
 		lblshow1.setFont(new Font("바탕", Font.BOLD, 30));
 		lblshow1.setBounds(153, 128, 819, 59);
 		contentPane.add(lblshow1);
 
-		lblshow2 = new JLabel(arrname[1]+":\t"+arrscore[1]+"점");
+		lblshow2 = new JLabel("2등"+arrname[1]+":\t"+arrscore[1]+"점");
 		lblshow2.setFont(new Font("바탕", Font.BOLD, 30));
 		lblshow2.setBounds(153, 217, 819, 59);
 		contentPane.add(lblshow2);
 
-		lblshow3 = new JLabel(arrname[2]+":\t"+arrscore[2]+"점");
+		lblshow3 = new JLabel("3등"+arrname[2]+":\t"+arrscore[2]+"점");
 		lblshow3.setFont(new Font("바탕", Font.BOLD, 30));
 		lblshow3.setBounds(153, 311, 819, 59);
 		contentPane.add(lblshow3);
 
-		lblshow4 = new JLabel(arrname[3]+":\t"+arrscore[3]+"점");
+		lblshow4 = new JLabel("4등"+arrname[3]+":\t"+arrscore[3]+"점");
 		lblshow4.setFont(new Font("바탕", Font.BOLD, 30));
 		lblshow4.setBounds(153, 406, 819, 59);
 		contentPane.add(lblshow4);
 
-		lblshow5 = new JLabel(arrname[4]+":\t"+arrscore[4]+"점");
+		lblshow5 = new JLabel("5등"+arrname[4]+":\t"+arrscore[4]+"점");
 		lblshow5.setFont(new Font("바탕", Font.BOLD, 30));
 		lblshow5.setBounds(153, 491, 819, 59);
 		contentPane.add(lblshow5);
-
-
-
-
 
 
 

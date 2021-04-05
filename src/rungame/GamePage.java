@@ -35,6 +35,7 @@ public class GamePage extends JFrame{
 	private static JLabel lblshow;
 	private static JLabel lblquestion;
 	public static String question;
+
 	public static int cnt=0; //문제바꾸는 용도 
 	public static int trial = 3; //3번의 기회
 	public static int opt;//사칙연산
@@ -46,9 +47,9 @@ public class GamePage extends JFrame{
 	private static JButton btncheck = new JButton("\uD655\uC778");
 	private JLabel lblwrong;
 	private JLabel lbltotal;
-	public interface TestInterface {
-
-	}
+	private JLabel lblstage;
+	
+	
 
 	public static int getRandom(int cnt){
 		int ran =0;	
@@ -56,22 +57,50 @@ public class GamePage extends JFrame{
 		case 0:
 		case 1: int ran1 = (int)(Math.random()*10+1);	//-----------0~9까지 랜덤수
 		ran=ran1;
+		
 		break;
 		case 2: 
 		case 3:
 		case 4:
 		case 5: int ran2 = (int)(Math.random()*89+10);//----------- 10~99까지 랜덤수
 		ran=ran2;
+		
 		break;
 		case 6:
 		case 7:
 		case 8:
 		default:int ran3 =(int)(Math.random()*899+100);//------------ 100~999까지 랜덤수
 		ran=ran3;
+		
 		break;
 
 		}
 		return ran;//random 정수값 리턴
+	}//getRandom-end
+	public static String getStage(int cnt){
+		String stage ="";	
+		switch(cnt){
+		case 0:
+		case 1: //-----------0~9까지 랜덤수
+		stage="★";
+		break;
+		case 2: 
+		case 3:
+		case 4:
+		case 5: //----------- 10~99까지 랜덤수
+		
+		stage="★★";
+		break;
+		case 6:
+		case 7:
+		case 8:
+		//------------ 100~999까지 랜덤수
+		
+		stage="★★★";
+		break;
+		
+		}
+		return stage;//random 정수값 리턴
 	}//getRandom-end
 
 	public static int getPoint(int cnt){
@@ -145,6 +174,8 @@ public class GamePage extends JFrame{
 
 		return question;
 	}
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -153,6 +184,7 @@ public class GamePage extends JFrame{
 		EventQueue.invokeLater(new Runnable(){
 			public void run(){
 				GamePage frame = new GamePage();
+				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 
 			}//run() end
@@ -173,7 +205,7 @@ public class GamePage extends JFrame{
 
 		lblquestion = new JLabel("\uBB38\uC81C"+": "); //"문제 :"출력하는 라벨 
 		lblquestion.setFont(new Font("바탕체", Font.BOLD, 60));
-		lblquestion.setBounds(227, 162, 202, 184);
+		lblquestion.setBounds(298, 162, 202, 184);
 		contentPane.add(lblquestion);
 
 
@@ -182,7 +214,7 @@ public class GamePage extends JFrame{
 
 		txtanswer = new JTextField(); //답입력받는 textfield
 		txtanswer.setFont(new Font("바탕체", Font.BOLD, 40));
-		txtanswer.setBounds(414, 442, 274, 99);
+		txtanswer.setBounds(442, 336, 274, 99);
 		contentPane.add(txtanswer);
 		txtanswer.setColumns(10);
 
@@ -190,7 +222,7 @@ public class GamePage extends JFrame{
 		lblquestion.setLabelFor(lblshow);
 		lblshow.setBackground(Color.WHITE);
 		lblshow.setFont(new Font("바탕체", Font.BOLD, 60));
-		lblshow.setBounds(414, 162, 453, 184);
+		lblshow.setBounds(470, 162, 453, 184);
 		contentPane.add(lblshow);
 
 
@@ -212,6 +244,7 @@ public class GamePage extends JFrame{
 					}else {//정답확인 if-end
 						lblwrong.setText("땡! 오답입니다!");
 						trial--;
+						lblstage.setText(getStage(cnt));
 						if (trial==0) {
 							showMessageDialog(lblshow,"총 점수는 "+total+"점 입니다.");
 							/*SetDefault sd=new SetDefault();
@@ -242,15 +275,14 @@ public class GamePage extends JFrame{
 							dispose();
 							setVisible(false);
 							new RankPage().setVisible(true);
+							
 						}//if(trial)-end
 						//RankPage로 넘겨줌				
-
 
 					}
 				}//오답일시 else-end
 				String txt=String.valueOf(total);
 				lbltotal.setText(txt);
-
 				lblshow.setText(getQuestion(++cnt));//새로운 문제 띄우기
 
 			}catch (NumberFormatException e ){ //try-end
@@ -258,14 +290,12 @@ public class GamePage extends JFrame{
 				e.printStackTrace();
 			}	
 		}//mouseClicked-end
-
 	});//btnchek.MouseListener-end
 
 
 		btncheck.setFont(new Font("경기천년제목V Bold", Font.BOLD, 22));
-		btncheck.setBounds(443, 561, 196, 50);
+		btncheck.setBounds(470, 501, 196, 50);
 		contentPane.add(btncheck);
-
 
 		try {
 			BufferedReader br =new BufferedReader(new FileReader("Nickname.txt"));
@@ -288,14 +318,24 @@ public class GamePage extends JFrame{
 		lblwrong = new JLabel("");
 		lblwrong.setForeground(Color.RED);
 		lblwrong.setFont(new Font("바탕체", Font.BOLD, 29));
-		lblwrong.setBounds(363, 367, 367, 65);
+		lblwrong.setBounds(411, 585, 367, 65);
 		contentPane.add(lblwrong);
 
 		lbltotal = new JLabel("0");
 		lbltotal.setFont(new Font("바탕체", Font.BOLD, 30));
 		lbltotal.setBounds(377, 35, 184, 84);
 		contentPane.add(lbltotal);
-
+		
+		JLabel lblhard = new JLabel("\uD604\uC7AC \uB09C\uC774\uB3C4");
+		lblhard.setFont(new Font("바탕체", Font.BOLD, 19));
+		lblhard.setBounds(827, 39, 144, 84);
+		contentPane.add(lblhard);
+		
+		lblstage = new JLabel(getStage(cnt));
+		lblstage.setForeground(Color.ORANGE);
+		lblstage.setFont(new Font("맑은 고딕", Font.BOLD, 38));
+		lblstage.setBounds(966, 23, 266, 99);
+		contentPane.add(lblstage);
 
 
 
