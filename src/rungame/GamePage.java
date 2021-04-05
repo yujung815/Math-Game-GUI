@@ -24,6 +24,7 @@ import javax.swing.border.EmptyBorder;
 
 
 import rank.*;
+import javax.swing.ImageIcon;
 
 public class GamePage extends JFrame{
 
@@ -185,6 +186,7 @@ public class GamePage extends JFrame{
 			public void run(){
 				GamePage frame = new GamePage();
 				frame.setLocationRelativeTo(null);
+				frame.setResizable(false);
 				frame.setVisible(true);
 
 			}//run() end
@@ -196,7 +198,7 @@ public class GamePage extends JFrame{
 	 */
 	public GamePage() throws NullPointerException{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(1200, 800, 1200, 800);
+		setBounds(600,300, 1200, 800);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 235, 205));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -204,8 +206,8 @@ public class GamePage extends JFrame{
 		contentPane.setLayout(null);
 
 		lblquestion = new JLabel("\uBB38\uC81C"+": "); //"문제 :"출력하는 라벨 
-		lblquestion.setFont(new Font("바탕체", Font.BOLD, 60));
-		lblquestion.setBounds(298, 162, 202, 184);
+		lblquestion.setFont(new Font("경기천년제목V Bold", Font.BOLD, 60));
+		lblquestion.setBounds(268, 315, 202, 184);
 		contentPane.add(lblquestion);
 
 
@@ -213,16 +215,17 @@ public class GamePage extends JFrame{
 
 
 		txtanswer = new JTextField(); //답입력받는 textfield
+		txtanswer.setBackground(new Color(255, 255, 255));
 		txtanswer.setFont(new Font("바탕체", Font.BOLD, 40));
-		txtanswer.setBounds(442, 336, 274, 99);
+		txtanswer.setBounds(452, 476, 274, 99);
 		contentPane.add(txtanswer);
 		txtanswer.setColumns(10);
 
 		lblshow = new JLabel(getQuestion(cnt));
 		lblquestion.setLabelFor(lblshow);
 		lblshow.setBackground(Color.WHITE);
-		lblshow.setFont(new Font("바탕체", Font.BOLD, 60));
-		lblshow.setBounds(470, 162, 453, 184);
+		lblshow.setFont(new Font("경기천년제목V Bold", Font.BOLD, 60));
+		lblshow.setBounds(435, 355, 453, 105);
 		contentPane.add(lblshow);
 
 
@@ -230,13 +233,18 @@ public class GamePage extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				try{String answer =(txtanswer.getText()).toString();//정답받아오기
-
+					
 				if(answer.isEmpty()) { //아무것도 없을때 예외처리
 					showMessageDialog(lblshow,"정답을 입력해주세요!");		
 
 				}else {//if-end
+					int answer1;
 					answer =txtanswer.getText();//정답입력받아 String answer에 넣음
-					int answer1=Integer.parseInt(answer);
+					if (answer=="0") {
+						answer1=0;
+					}else {
+					answer1=Integer.parseInt(answer);
+					
 					if (answer1==getAnswer(num1,num2,cnt)) {//정답일치확인
 						lblwrong.setText("정답입니다!");
 						getPoint(cnt);
@@ -284,17 +292,18 @@ public class GamePage extends JFrame{
 				String txt=String.valueOf(total);
 				lbltotal.setText(txt);
 				lblshow.setText(getQuestion(++cnt));//새로운 문제 띄우기
-
+				txtanswer.setText("");
+				}//else-end
 			}catch (NumberFormatException e ){ //try-end
 				showMessageDialog(lblshow,"숫자로만 입력해 주세요");
-				e.printStackTrace();
+				//exception에서 탈출햇
 			}	
 		}//mouseClicked-end
 	});//btnchek.MouseListener-end
 
 
 		btncheck.setFont(new Font("경기천년제목V Bold", Font.BOLD, 22));
-		btncheck.setBounds(470, 501, 196, 50);
+		btncheck.setBounds(498, 613, 196, 50);
 		contentPane.add(btncheck);
 
 		try {
@@ -311,31 +320,36 @@ public class GamePage extends JFrame{
 		}
 
 		lblnick = new JLabel(nickname+"님의 현재점수 :");
-		lblnick.setFont(new Font("바탕체", Font.BOLD, 25));
-		lblnick.setBounds(41, 31, 367, 84);
+		lblnick.setFont(new Font("경기천년제목V Bold", Font.BOLD, 25));
+		lblnick.setBounds(12, 37, 367, 84);
 		contentPane.add(lblnick);
 
 		lblwrong = new JLabel("");
 		lblwrong.setForeground(Color.RED);
 		lblwrong.setFont(new Font("바탕체", Font.BOLD, 29));
-		lblwrong.setBounds(411, 585, 367, 65);
+		lblwrong.setBounds(430, 303, 367, 65);
 		contentPane.add(lblwrong);
 
 		lbltotal = new JLabel("0");
-		lbltotal.setFont(new Font("바탕체", Font.BOLD, 30));
-		lbltotal.setBounds(377, 35, 184, 84);
+		lbltotal.setFont(new Font("경기천년제목V Bold", Font.BOLD, 30));
+		lbltotal.setBounds(344, 35, 184, 84);
 		contentPane.add(lbltotal);
 		
 		JLabel lblhard = new JLabel("\uD604\uC7AC \uB09C\uC774\uB3C4");
-		lblhard.setFont(new Font("바탕체", Font.BOLD, 19));
-		lblhard.setBounds(827, 39, 144, 84);
+		lblhard.setFont(new Font("경기천년제목V Bold", Font.BOLD, 23));
+		lblhard.setBounds(857, 173, 144, 84);
 		contentPane.add(lblhard);
 		
 		lblstage = new JLabel(getStage(cnt));
 		lblstage.setForeground(Color.ORANGE);
 		lblstage.setFont(new Font("맑은 고딕", Font.BOLD, 38));
-		lblstage.setBounds(966, 23, 266, 99);
+		lblstage.setBounds(996, 157, 266, 99);
 		contentPane.add(lblstage);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(GamePage.class.getResource("/rungame/typewriter.png")));
+		lblNewLabel.setBounds(0, 0, 1200, 800);
+		contentPane.add(lblNewLabel);
 
 
 
